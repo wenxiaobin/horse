@@ -1,0 +1,331 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "RP API",
+    "description": "RP SWAGGER API",
+    "license": {
+      "name": "Apache 2.0",
+      "url": ""
+    },
+    "version": "V0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1/sdcloud/rpm-rp-plan/isdp/rpm/rpplan",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/v1/oneFlow/task/queryTaskPassOutList": {
+      "post": {
+        "tags": [
+          "一条流任务通"
+        ],
+        "summary": "（明日任务管理）引入计划外任务查询服务",
+        "description": "返回计划外任务列表数据",
+        "operationId": "queryTaskPassOutList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OneFlowTaskPassOutListQueryVO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommonResultInfoPageResultOneFlowTaskPassOutListVO"
+                }
+              }
+            }
+          }
+        },
+        "x-limit": "500",
+        "x-permission": "单项目",
+        "x-sensitive": "不涉及"
+      }
+    }
+  },
+"components": {"schemas": {
+    "OneFlowTaskPassOutListQueryVO": {
+      "required": [
+        "projectNumber",
+        "sceneId"
+      ],
+      "type": "object",
+      "properties": {
+        "curPage": {
+          "type": "integer",
+          "description": "当前页码",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "每页条数",
+          "format": "int32"
+        },
+        "projectNumber": {
+          "type": "string",
+          "description": "项目编码"
+        },
+        "sceneId": {
+          "type": "integer",
+          "description": "场景id",
+          "format": "int64"
+        },
+        "nodeId": {
+          "type": "integer",
+          "description": "nodeId",
+          "format": "int64"
+        },
+        "activityId": {
+          "type": "integer",
+          "description": "活动id",
+          "format": "int64"
+        },
+        "startDate": {
+          "type": "string",
+          "description": "查询开始时间，格式yyyy-MM-dd"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "查询结束时间，格式yyyy-MM-dd"
+        },
+        "regionList": {
+          "type": "array",
+          "description": "区域数组",
+          "items": {
+            "type": "string"
+          }
+        },
+        "activityIdList": {
+          "type": "array",
+          "description": "当前活动id数组",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "duCode": {
+          "type": "string",
+          "description": "duCode（模糊查询）"
+        },
+        "duCodeList": {
+          "type": "array",
+          "description": "duCode数组（精确查询）",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "明日任务管理-引入计划外（不在时间范围内的）任务查询参数视图"
+    },
+    "CommonResultInfoPageResultOneFlowTaskPassOutListVO": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/components/schemas/PageResultOneFlowTaskPassOutListVO"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "sysDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "PageResultOneFlowTaskPassOutListVO": {
+      "type": "object",
+      "properties": {
+        "pageVO": {
+          "$ref": "#/components/schemas/PageVO"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/OneFlowTaskPassOutListVO"
+          }
+        },
+        "map": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "PageVO": {
+      "type": "object",
+      "properties": {
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "curPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "filterStr": {
+          "type": "string"
+        },
+        "orderBy": {
+          "type": "string"
+        },
+        "filterArray": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "startIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "endIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalRows": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "start": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "end": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "OneFlowTaskPassOutListVO": {
+      "type": "object",
+      "properties": {
+        "nodeId": {
+          "type": "integer",
+          "description": "nodeId",
+          "format": "int64"
+        },
+        "nodeName": {
+          "type": "string",
+          "description": "节点Name"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "description": "当前节点Name"
+        },
+        "duId": {
+          "type": "integer",
+          "description": "duId",
+          "format": "int64"
+        },
+        "zone": {
+          "type": "string",
+          "description": "区域"
+        },
+        "activityName": {
+          "type": "string",
+          "description": "活动名称"
+        },
+        "currentActivityName": {
+          "type": "string",
+          "description": "当前活动名称"
+        },
+        "projectNumber": {
+          "type": "string",
+          "description": "项目编码"
+        },
+        "woStatus": {
+          "type": "string",
+          "description": "状态"
+        },
+        "activityId": {
+          "type": "integer",
+          "description": "活动id",
+          "format": "int64"
+        },
+        "taskId": {
+          "type": "integer",
+          "description": "任务id",
+          "format": "int64"
+        },
+        "planId": {
+          "type": "integer",
+          "description": "计划id",
+          "format": "int64"
+        },
+        "duCode": {
+          "type": "string",
+          "description": "duCode（前端DU ID）"
+        },
+        "duName": {
+          "type": "string",
+          "description": "duName"
+        },
+        "leadTime": {
+          "type": "integer",
+          "description": "持续时间",
+          "format": "int32"
+        },
+        "planStartTime": {
+          "type": "string",
+          "description": "计划开始时间",
+          "format": "date-time"
+        },
+        "planEndTime": {
+          "type": "string",
+          "description": "计划结束时间",
+          "format": "date-time"
+        },
+        "actualStartTime": {
+          "type": "string",
+          "description": "实际开始时间",
+          "format": "date-time"
+        },
+        "actualEndTime": {
+          "type": "string",
+          "description": "实际结束时间",
+          "format": "date-time"
+        },
+        "owner": {
+          "type": "string",
+          "description": "责任人"
+        },
+        "skill": {
+          "type": "string",
+          "description": "技能"
+        },
+        "contractorName": {
+          "type": "string",
+          "description": "分包商"
+        },
+        "sortNum": {
+          "type": "integer",
+          "description": "排序",
+          "format": "int32"
+        }
+      },
+      "description": "明日任务管理-引入计划外返回对象"
+    }
+  }
+}
+}
